@@ -42,7 +42,7 @@ export function useFrameLoader(totalFrames: number): {
       return new Promise<void>((resolve) => {
         const img = new Image();
         const frameNumber = String(i + 1).padStart(4, "0");
-        img.src = `${FRAME_PATH_PREFIX}${frameNumber}.png`;
+        img.src = `${FRAME_PATH_PREFIX}${frameNumber}.webp`;
 
         img.onload = () => {
           framesRef.current[i] = img;
