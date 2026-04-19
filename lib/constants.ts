@@ -8,10 +8,9 @@ export const TOTAL_FRAMES = 240;
 /** Path prefix for frame images (append zero-padded index + '.png'). */
 export const FRAME_PATH_PREFIX = '/frames/frame_';
 
-/** Facebook Messenger deep-link for all CTA buttons.
- *  Uses fb.com/msg format which reliably opens Messenger on mobile
- *  instead of redirecting to the app store like m.me links often do. */
-export const MESSENGER_URL = 'https://www.facebook.com/msg/61583394983925/';
+/** Facebook page link for all CTA buttons.
+ *  Links directly to the Facebook page so users can message from there. */
+export const MESSENGER_URL = 'https://www.facebook.com/profile.php?id=61583394983925';
 
 /** Core colour palette used across the site. */
 export const COLORS = {

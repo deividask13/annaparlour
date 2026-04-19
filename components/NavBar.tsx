@@ -53,17 +53,17 @@ export default function NavBar() {
         <a
           href="#hero"
           className="inline-flex items-center min-h-[44px] select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#080808]"
-          aria-label="Anna Nails – back to top"
+          aria-label="Anastasija's Beauty Parlour – back to top"
         >
           <Image
             src="/logo.jpg"
-            alt="Anna Nails logo"
+            alt="Anastasija's Beauty Parlour logo"
             width={40}
             height={40}
             className="rounded-full"
           />
           <span className="ml-2 font-playfair text-xl text-white/90 tracking-wide">
-            Anna Nails
+            Anastasija's Beauty Parlour
           </span>
         </a>
 
