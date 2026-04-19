@@ -63,7 +63,7 @@ export default function NavBar() {
             className="rounded-full"
           />
           <span className="ml-2 font-playfair text-xl text-white/90 tracking-wide">
-            Anastasija's Beauty Parlour
+            Anastasija&apos;s Beauty Parlour
           </span>
         </a>
 
