@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 
 /** Total number of frames in the scroll-synced image sequence. */
-export const TOTAL_FRAMES = 240;
+export const TOTAL_FRAMES = 192;
 
 /** Path prefix for frame images (append zero-padded index + '.png'). */
 export const FRAME_PATH_PREFIX = '/frames/frame_';
@@ -75,8 +75,8 @@ export interface Testimonial {
 // ---------------------------------------------------------------------------
 
 export const OVERLAY_MILESTONES: OverlayMilestone[] = [
-  { text: 'The Canvas.', startFrame: 1, endFrame: 10 },
-  { text: 'The Craft.', startFrame: 11, endFrame: 25 },
-  { text: 'The Art.', startFrame: 26, endFrame: 40 },
-  { text: 'Anna Nails. Wolverhampton.', startFrame: 41, endFrame: 240 },
+  { text: 'The Canvas.', startFrame: 1, endFrame: 8 },
+  { text: 'The Craft.', startFrame: 9, endFrame: 20 },
+  { text: 'The Art.', startFrame: 21, endFrame: 32 },
+  { text: 'Anna Nails. Wolverhampton.', startFrame: 33, endFrame: 192 },
 ];
