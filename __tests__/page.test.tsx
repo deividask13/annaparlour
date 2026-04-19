@@ -59,6 +59,7 @@ jest.mock("@/hooks/useFrameLoader", () => ({
   useFrameLoader: () => ({
     frames: [],
     progress: 1,
+    isReady: true,
     isLoaded: true,
   }),
 }));

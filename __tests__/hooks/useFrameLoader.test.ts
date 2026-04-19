@@ -1,5 +1,5 @@
 /**
- * Unit tests for useFrameLoader hook.
+ * Unit tests for useFrameLoader hook (progressive loading).
  *
  * Validates: Requirements 4.1, 4.6
  */
@@ -21,7 +21,6 @@ let mockImages: MockImage[];
 beforeEach(() => {
   mockImages = [];
 
-  // Replace the global Image constructor with a mock
   (global as any).Image = class {
     src = "";
     onload: (() => void) | null = null;
@@ -34,7 +33,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  // Restore original Image (jsdom provides one)
   delete (global as any).Image;
 });
 
@@ -66,28 +64,24 @@ function resolveImage(index: number) {
 // ---------------------------------------------------------------------------
 
 describe("useFrameLoader", () => {
-  it("starts with progress 0 and isLoaded false", () => {
+  it("starts with progress 0, isReady false, and isLoaded false", () => {
     const { result } = renderHook(() => useFrameLoader(10));
 
     expect(result.current.progress).toBe(0);
+    expect(result.current.isReady).toBe(false);
     expect(result.current.isLoaded).toBe(false);
   });
 
-  it("creates the correct number of Image objects", () => {
-    renderHook(() => useFrameLoader(10));
-
-    expect(mockImages).toHaveLength(10);
-  });
-
-  it("sets correct src paths with zero-padded frame numbers", () => {
+  it("sets correct src paths with zero-padded frame numbers and .webp extension", () => {
     renderHook(() => useFrameLoader(3));
 
-    expect(mockImages[0].src).toBe("/frames/frame_0001.png");
-    expect(mockImages[1].src).toBe("/frames/frame_0002.png");
-    expect(mockImages[2].src).toBe("/frames/frame_0003.png");
+    expect(mockImages[0].src).toBe("/frames/frame_0001.webp");
+    expect(mockImages[1].src).toBe("/frames/frame_0002.webp");
+    expect(mockImages[2].src).toBe("/frames/frame_0003.webp");
   });
 
-  it("sets isLoaded to true when all frames load", async () => {
+  it("sets isReady after initial batch loads (small total)", async () => {
+    // With only 5 frames, all are in the initial batch
     const { result } = renderHook(() => useFrameLoader(5));
 
     act(() => {
@@ -95,8 +89,44 @@ describe("useFrameLoader", () => {
     });
 
     await waitFor(() => {
+      expect(result.current.isReady).toBe(true);
       expect(result.current.isLoaded).toBe(true);
       expect(result.current.progress).toBe(1);
+    });
+  });
+
+  it("sets isReady before isLoaded for large frame counts", async () => {
+    const { result } = renderHook(() => useFrameLoader(40));
+
+    // Resolve only the first 20 (initial batch)
+    act(() => {
+      for (let i = 0; i < 20; i++) {
+        resolveImage(i);
+      }
+    });
+
+    await waitFor(() => {
+      expect(result.current.isReady).toBe(true);
+    });
+
+    // isLoaded should still be false since remaining frames haven't loaded
+    expect(result.current.isLoaded).toBe(false);
+
+    // Background loading uses concurrency lanes that create Image objects
+    // on demand. Keep resolving newly created images until all 40 are done.
+    const resolved = new Set<number>();
+    for (let i = 0; i < 20; i++) resolved.add(i);
+
+    await waitFor(() => {
+      act(() => {
+        mockImages.forEach((img, idx) => {
+          if (!resolved.has(idx) && img.onload) {
+            resolved.add(idx);
+            img.onload();
+          }
+        });
+      });
+      expect(result.current.isLoaded).toBe(true);
     });
   });
 
@@ -104,7 +134,6 @@ describe("useFrameLoader", () => {
     const { result } = renderHook(() => useFrameLoader(5));
 
     act(() => {
-      // Fail frame 0 and 2, resolve the rest
       failImage(0);
       resolveImage(1);
       failImage(2);
@@ -117,7 +146,6 @@ describe("useFrameLoader", () => {
       expect(result.current.progress).toBe(1);
     });
 
-    // Failed frames should be null
     expect(result.current.frames[0]).toBeNull();
     expect(result.current.frames[2]).toBeNull();
   });
@@ -151,6 +179,7 @@ describe("useFrameLoader", () => {
     const { result } = renderHook(() => useFrameLoader(0));
 
     await waitFor(() => {
+      expect(result.current.isReady).toBe(true);
       expect(result.current.isLoaded).toBe(true);
     });
 

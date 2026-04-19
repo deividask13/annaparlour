@@ -13,19 +13,15 @@ import ProgressBar from "./ProgressBar";
 /**
  * ScrollSequence – Orchestrates the scroll-synced image sequence section.
  *
- * Wraps ScrollCanvas, ParallaxOverlay, and ProgressBar in a tall container
- * (350vh) with a sticky inner viewport. Uses Framer Motion `useScroll` to
- * derive scroll progress and passes it to child components.
- *
- * While frames are loading, a progress bar is shown and scroll interaction
- * is disabled. When `prefers-reduced-motion` is active, a static final
- * frame and the last overlay text are rendered instead of the canvas.
+ * Uses progressive loading: the experience becomes interactive after the
+ * first batch of frames loads (isReady), while remaining frames continue
+ * loading in the background. The progress bar reflects overall loading.
  *
  * Requirements: 4.5, 5.1, 5.2, 5.6, 5.7, 6.6, 13.4
  */
 export default function ScrollSequence() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { frames, progress, isLoaded } = useFrameLoader(TOTAL_FRAMES);
+  const { frames, progress, isReady } = useFrameLoader(TOTAL_FRAMES);
   const reducedMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -43,7 +39,7 @@ export default function ScrollSequence() {
   return (
     <section
       ref={containerRef}
-      className={`relative h-[350vh]${!isLoaded ? " overflow-hidden" : ""}`}
+      className={`relative h-[350vh]${!isReady ? " overflow-hidden" : ""}`}
       aria-label="Nail transformation scroll sequence"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
@@ -67,7 +63,7 @@ export default function ScrollSequence() {
         ) : (
           /* Full scroll-synced canvas experience */
           <div className="relative h-full w-full">
-            {isLoaded ? (
+            {isReady ? (
               <>
                 <ScrollCanvas
                   frames={frames}
@@ -87,8 +83,8 @@ export default function ScrollSequence() {
         )}
       </div>
 
-      {/* Progress bar shown during frame loading */}
-      <ProgressBar progress={progress} isVisible={!isLoaded && !reducedMotion} />
+      {/* Progress bar shown during initial frame loading */}
+      <ProgressBar progress={progress} isVisible={!isReady && !reducedMotion} />
     </section>
   );
 }
