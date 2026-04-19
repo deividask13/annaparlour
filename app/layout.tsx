@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Playfair_Display, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -43,6 +44,7 @@ export default function RootLayout({
         className={`${cormorant.variable} ${playfair.variable} ${inter.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
