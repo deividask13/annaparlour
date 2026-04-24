@@ -27,7 +27,6 @@ export const FILTER_CATEGORIES = [
   'Gel',
   'Acrylics',
   'Nail Art',
-  'Press-Ons',
 ] as const;
 
 // ---------------------------------------------------------------------------
@@ -42,7 +41,7 @@ export interface OverlayMilestone {
 }
 
 /** Category values used to tag portfolio items. */
-export type PortfolioCategory = 'Gel' | 'Acrylics' | 'Nail Art' | 'Press-Ons';
+export type PortfolioCategory = 'Gel' | 'Acrylics' | 'Nail Art';
 
 /** A single portfolio image entry. */
 export interface PortfolioItem {

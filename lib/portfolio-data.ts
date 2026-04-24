@@ -42,13 +42,6 @@ export const portfolioItems: PortfolioItem[] = [
     aspectRatio: 'portrait',
   },
   {
-    id: 'work-006',
-    src: '/portfolio/6.jpg',
-    alt: 'Bespoke press-on nail set with curated design',
-    category: 'Press-Ons',
-    aspectRatio: 'square',
-  },
-  {
     id: 'work-007',
     src: '/portfolio/7.jpg',
     alt: 'Freehand nail art featuring delicate floral patterns',

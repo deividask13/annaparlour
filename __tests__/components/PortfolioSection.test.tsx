@@ -75,8 +75,8 @@ const instagramItems: PortfolioItem[] = [
   {
     id: "ig-003",
     src: "https://scontent.cdninstagram.com/image3.jpg",
-    alt: "Press-on nails custom design #pressons",
-    category: "Press-Ons",
+    alt: "Nail art with hand-painted florals #nailart",
+    category: "Nail Art",
     aspectRatio: "square",
   },
 ];
@@ -201,7 +201,7 @@ describe("PortfolioSection", () => {
     });
 
     // All filter tabs should be present
-    const expectedTabs = ["All", "Gel", "Acrylics", "Nail Art", "Press-Ons"];
+    const expectedTabs = ["All", "Gel", "Acrylics", "Nail Art"];
     for (const tab of expectedTabs) {
       expect(screen.getByRole("tab", { name: tab })).toBeInTheDocument();
     }

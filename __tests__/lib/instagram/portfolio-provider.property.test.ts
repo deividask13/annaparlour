@@ -19,7 +19,6 @@ const VALID_CATEGORIES: PortfolioCategory[] = [
   'Gel',
   'Acrylics',
   'Nail Art',
-  'Press-Ons',
 ];
 
 /** Arbitrary that generates a valid Instagram media type (non-VIDEO). */
@@ -278,7 +277,6 @@ describe('Portfolio Data Provider – Property 7: Merge deduplication and orderi
     'Gel',
     'Acrylics',
     'Nail Art',
-    'Press-Ons',
   );
 
   /** Valid aspect ratios for PortfolioItem. */

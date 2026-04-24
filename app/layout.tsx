@@ -26,7 +26,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Anna Nails | Luxury Nail Technician · Wolverhampton",
   description:
-    "Premium nail technician in Wolverhampton offering bespoke gel extensions, acrylics, nail art, and press-on sets. Book your luxury nail appointment with Anna Nails today.",
+    "Premium nail technician in Wolverhampton offering bespoke gel extensions, acrylics, and nail art. Book your luxury nail appointment with Anna Nails today.",
   icons: {
     icon: "/logo.jpg",
     apple: "/logo.jpg",
