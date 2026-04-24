@@ -12,7 +12,6 @@ export const HASHTAG_MAP: Record<string, PortfolioCategory> = {
   '#gel': 'Gel',
   '#acrylics': 'Acrylics',
   '#nailart': 'Nail Art',
-  '#pressons': 'Press-Ons',
 };
 
 /** Category assigned when no recognised hashtag is found in a caption. */

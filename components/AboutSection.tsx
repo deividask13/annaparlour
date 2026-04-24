@@ -56,11 +56,8 @@ export default function AboutSection() {
             </p>
 
             <p>
-              Whether you&rsquo;re after sculpted gel extensions, intricate hand-painted
-              art, or a beautifully curated press-on set you can wear on your
-              own terms, I&rsquo;m here to make it happen. My studio is your
-              space to relax, chat, and leave feeling like the best version of
-              yourself.
+              Whether you&rsquo;re after sculpted gel extensions or intricate hand-painted
+              art, I&rsquo;m here to make it happen.
             </p>
           </div>
 

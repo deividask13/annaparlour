@@ -5,11 +5,11 @@ import Image from "next/image";
 import MessengerCTA from "@/components/MessengerCTA";
 
 const NAV_LINKS = [
-  { href: "#hero", label: "Hero" },
+  { href: "#hero", label: "Home" },
   { href: "#portfolio", label: "Portfolio" },
   { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
-  { href: "#testimonials", label: "Testimonials" },
+  { href: "#testimonials", label: "Reviews" },
   { href: "#contact", label: "Contact" },
 ] as const;
 
